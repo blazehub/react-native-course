@@ -5,10 +5,10 @@ export default function App() {
 
 
   return (
-    <View style={{ padding: 50 }}>
-      <View style={{ display: 'flex', flexDirection: 'row' }}>
+    <View style={styles.screen}>
+      <View style={styles.inputContainer}>
         <TextInput placeholder="Course Goal"
-          style={{ borderColor: 'black', borderWidth: 1, padding: 5, flex: 1 }} />
+          style={styles.input} />
         <Button title="ADD" />
       </View>
       <View>
@@ -19,5 +19,18 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
-
+  screen: {
+    padding: 50
+  },
+  inputContainer: {
+    display: 'flex',
+    flexDirection: 'row'
+  },
+  input: {
+    borderColor: 'black',
+    borderWidth: 1,
+    padding: 5,
+    flex: 1
+  }
 });
+
