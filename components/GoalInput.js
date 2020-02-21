@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TextInput, StyleSheet, Button } from 'react-native';
+import { View, TextInput, StyleSheet, Button, Modal } from 'react-native';
 
 
 const GoalInput = (props) => {
@@ -9,27 +9,52 @@ const GoalInput = (props) => {
         setEnteredGoal(enteredText);
     }
 
+    const addGoalHandler = () => {
+        props.onAddGoal.bind(this, enteredGoal);
+        setEnteredGoal('');
+    }
+
     return (
-        <View style={styles.inputContainer}>
-            <TextInput placeholder="Course Goal"
-                style={styles.input}
-                onChangeText={goalInputHandler}
-                value={enteredGoal} />
-            <Button title="ADD" onPress={props.onAddGoal.bind(this, enteredGoal)} />
-        </View>
+        <Modal visible={props.visible} animationType="slide">
+            <View style={styles.inputContainer}>
+                <TextInput placeholder="Course Goal"
+                    style={styles.input}
+                    onChangeText={goalInputHandler}
+                    value={enteredGoal} />
+                <View style={styles.buttonContainer}>
+                    <View style={styles.button}>
+                        <Button title="CANCEL" color="red" onPress={props.onCancel} />
+                    </View>
+                    <View style={styles.button}>
+                        <Button title="ADD" onPress={addGoalHandler} />
+                    </View>
+                </View>
+            </View>
+        </Modal>
     )
 }
 
 const styles = StyleSheet.create({
     inputContainer: {
-        display: 'flex',
-        flexDirection: 'row'
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     input: {
         borderColor: 'black',
         borderWidth: 1,
         padding: 5,
-        flex: 1
+        width: '80%',
+        marginBottom: 10
+    },
+    buttonContainer: {
+        flexDirection: 'row',
+        justifyContent:'center',
+        width: '80%'
+    },
+    button: {
+        width: 80,
+        marginHorizontal: 8
     }
 });
 
